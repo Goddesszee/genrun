@@ -600,9 +600,9 @@ function createGame(cv,ctx){
   const C={
     bg:'#030608',
     grid:'rgba(74,158,255,0.025)',
-    road:'#0A0F1A',
-    roadLine:'rgba(74,158,255,0.22)',
-    roadEdge:'rgba(74,158,255,0.4)',
+    road:'#1C2333',
+    roadLine:'rgba(255,255,255,0.55)',
+    roadEdge:'rgba(255,255,255,0.8)',
     blue:'#4A9EFF',
     green:'#00D4A3',
     red:'#FF4757',
@@ -686,7 +686,7 @@ function createGame(cv,ctx){
         ctx.fillStyle='rgba(255,184,0,0.18)';
         for(let wy=GROUND-b.h+8;wy<GROUND-10;wy+=b.winH+5){
           for(let wx=bx+6;wx<bx+b.w-6;wx+=b.winW+4){
-            if(Math.random()<0.6)ctx.fillRect(wx,wy,b.winW,b.winH);
+            ctx.fillRect(wx,wy,b.winW,b.winH);
           }
         }
       }
@@ -707,7 +707,7 @@ function createGame(cv,ctx){
       ctx.fillStyle='rgba(74,158,255,0.14)';
       for(let wy=GROUND-b.h+8;wy<GROUND-10;wy+=b.winH+5){
         for(let wx=bx+6;wx<bx+b.w-6;wx+=b.winW+4){
-          if(Math.random()<0.55)ctx.fillRect(wx,wy,b.winW,b.winH);
+          ctx.fillRect(wx,wy,b.winW,b.winH);
         }
       }
     });
@@ -1134,26 +1134,16 @@ function createGame(cv,ctx){
     drawSpeedLines();
 
     // ── ROAD ──
-    // Road surface
     ctx.fillStyle=C.road;ctx.fillRect(0,GROUND,W,H-GROUND);
-
-    // Road edge lines
-    ctx.shadowColor=C.blue;ctx.shadowBlur=8;
-    ctx.strokeStyle=C.roadEdge;ctx.lineWidth=2;
+    ctx.strokeStyle="rgba(255,255,255,0.85)";ctx.lineWidth=3;
     ctx.beginPath();ctx.moveTo(0,GROUND);ctx.lineTo(W,GROUND);ctx.stroke();
-    ctx.shadowBlur=0;
-
-    // Dashed center lane markers
-    ctx.strokeStyle=C.roadLine;ctx.lineWidth=3;
-    ctx.setLineDash([40,40]);
-    ctx.lineDashOffset=laneX;
+    ctx.strokeStyle="rgba(255,255,255,0.55)";ctx.lineWidth=4;
+    ctx.setLineDash([44,36]);ctx.lineDashOffset=-laneX;
     ctx.beginPath();ctx.moveTo(0,GROUND+22);ctx.lineTo(W,GROUND+22);ctx.stroke();
     ctx.setLineDash([]);
-
-    // Road kerb stripes at bottom
     for(let kx=-tX;kx<W+20;kx+=20){
-      ctx.fillStyle=(Math.floor((kx+tX)/20))%2===0?'rgba(255,71,87,0.35)':'rgba(255,255,255,0.15)';
-      ctx.fillRect(kx,GROUND+H-GROUND-8,20,8);
+      ctx.fillStyle=(Math.floor((kx+tX)/20))%2===0?"rgba(255,71,87,0.65)":"rgba(255,255,255,0.35)";
+      ctx.fillRect(kx,H-10,20,10);
     }
 
     // ── OBSTACLES ──
