@@ -899,10 +899,10 @@ function createGame(cv,ctx){
 
   function render(){
     const sx=shakeFrames>0?shakeX:0,sy=shakeFrames>0?shakeY:0;
-    ctx.save();ctx.translate(sx,sy);
-    ctx.clearRect(-10,-10,W+20,H+20);
-
-    ctx.fillStyle=C.bg;ctx.fillRect(-10,-10,W+20,H+20);
+    ctx.save();
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);
+    ctx.translate(sx,sy);
 
     ctx.strokeStyle=C.grid;ctx.lineWidth=1;
     for(let x=fX%60;x<W;x+=60){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,GROUND);ctx.stroke();}
@@ -1090,7 +1090,7 @@ function resizeCanvas(){
   if(!cv)return;
   const maxW=cv.parentElement.clientWidth;
   cv.style.width=Math.min(maxW,940)+'px';
-  cv.style.height=Math.round(Math.min(maxW,940)*340/940)+'px';
+  cv.style.height='auto';
 }
 window.addEventListener('resize',resizeCanvas);
 window.addEventListener('load',resizeCanvas);
