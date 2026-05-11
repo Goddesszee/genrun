@@ -70,8 +70,8 @@ body::after{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50
 .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:7px;background:var(--gl-bg3);border:1px solid var(--gl-border);cursor:pointer;font-size:16px;transition:all 0.15s;color:var(--gl-text-muted);}
 .icon-btn:hover{border-color:var(--gl-blue);color:var(--gl-blue);background:var(--gl-blue-glow);}
 .icon-btn.active{border-color:var(--gl-yellow);color:var(--gl-yellow);background:rgba(255,184,0,0.08);}
-#gameCanvas{display:block;width:100%;border-radius:8px;border:1px solid var(--gl-border);background:#030608;cursor:pointer;}
-.canvas-wrap{position:relative;}
+#gameCanvas{display:block;width:100%;height:auto;aspect-ratio:940/340;border-radius:8px;border:1px solid var(--gl-border);background:#030608;cursor:pointer;}
+.canvas-wrap{position:relative;width:100%;min-height:300px;}
 #overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(3,6,8,0.92);border-radius:8px;z-index:10;text-align:center;padding:24px;backdrop-filter:blur(8px);}
 #overlay h2{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:var(--gl-text);margin-bottom:6px;}
 #overlay p{color:var(--gl-text-muted);font-size:13px;margin-bottom:16px;max-width:360px;line-height:1.5;}
