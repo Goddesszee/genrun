@@ -256,7 +256,7 @@ kbd{background:var(--gl-bg3);border:1px solid var(--gl-border);border-radius:4px
 
 <script>
 const CONFIG={CONTRACT:"0xdbFff6386cEf13F6Cc62DAE03CaB4Cc621f3AfA8",RPC:"https://rpc-bradbury.genlayer.com",CHAIN_ID:"0x107D",CHAIN_NAME:"GenLayer Bradbury Testnet",CURRENCY:{name:"GEN",symbol:"GEN",decimals:18}};
-let wallet=null,lastScore=0,game=null;
+let wallet=null,lastScore=0,lastFrames=0,lastCoins=0,game=null;
 
 async function connectAny(){
   if(!window.ethereum){setS('No EVM wallet found. Install MetaMask or Rabby.','err');return;}
@@ -290,7 +290,7 @@ async function submitScore(){
   document.getElementById('submit-btn').disabled=true;
   gameS('Submitting to GenLayer…');
   try{
-    const d=JSON.stringify({method:'submit_score',args:[String(lastScore)]});
+    const d=JSON.stringify({method:'submit_score',args:[String(lastFrames),String(lastCoins)]});
     const tx=await window.ethereum.request({method:'eth_sendTransaction',params:[{from:wallet,to:CONFIG.CONTRACT,data:'0x'+hex(d),gas:'0x30000'}]});
     gameS('Submitted! TX: '+tx.slice(0,14)+'…','ok');
     document.getElementById('submit-panel').style.display='none';
@@ -413,7 +413,7 @@ function createGame(cv,ctx){
 
   function die(msg){
     dead=true;running=false;spawn(rx+RW/2,ry+RH/2,C.red,20);
-    lastScore=score;
+    lastScore=score;lastFrames=fr;lastCoins=coins;
     document.getElementById('last-score-display').textContent='Score '+score.toLocaleString()+' · '+dist+'m · '+coins+' GEN';
     setTimeout(()=>{
       document.getElementById('overlay').style.display='flex';
